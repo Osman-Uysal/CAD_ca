@@ -24,18 +24,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Navigate to carsApp directory and list contents
+      - name: Debug current directory
         run: |
-          cd carsApp
           pwd
           ls -al
+
+      - name: Navigate to carsApp directory
+        run: cd carsApp
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
-        # No working-directory here, the 'cd' command handles it in shell steps.
+
+      - name: Install dependencies
+        run: |
+          cd carsApp
+          bundle install
 
       - name: Set up database schema
         run: |
@@ -53,17 +59,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Navigate to carsApp directory and list contents
-        run: |
-          cd carsApp
-          pwd
-          ls -al
+      - name: Navigate to carsApp directory
+        run: cd carsApp
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          cd carsApp
+          bundle install
 
       - name: Lint code
         run: |
