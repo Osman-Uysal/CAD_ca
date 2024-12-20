@@ -25,6 +25,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verify Gemfile presence
+        run: ls -la
+
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
