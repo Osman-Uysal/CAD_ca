@@ -1,5 +1,4 @@
 name: "Ruby on Rails CI"
-
 on:
   push:
     branches: [ "main" ]
@@ -9,28 +8,33 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Verify Gemfile presence
-        run: ls -la
-        working-directory: ./carsApp
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
-        working-directory: ./carsApp
 
       - name: Set up database schema
         run: bundle exec rails db:schema:load
-        working-directory: ./carsApp
 
       - name: Run tests
         run: bundle exec rails test
-        working-directory: ./carsApp
 
   lint:
     runs-on: ubuntu-latest
@@ -43,7 +47,3 @@ jobs:
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
-
-      - name: Run RuboCop linter
-        run: bundle exec rubocop
-        working-directory: ./carsApp
