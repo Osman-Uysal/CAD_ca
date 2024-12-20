@@ -43,6 +43,11 @@ jobs:
           cd carsApp
           bundle install
 
+      - name: Fix script permissions
+        run: |
+          cd carsApp
+          chmod +x bin/*
+
       - name: Set up database schema
         run: |
           cd carsApp
@@ -73,7 +78,12 @@ jobs:
           cd carsApp
           bundle install
 
-      - name: Lint code
+      - name: Fix script permissions
         run: |
           cd carsApp
-          bundle exec rubocop
+          chmod +x bin/*
+
+      - name: Run RuboCop
+        run: |
+          cd carsApp
+          bundle exec rubocop --format simple
