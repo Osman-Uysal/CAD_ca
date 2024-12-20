@@ -15,18 +15,22 @@ jobs:
 
       - name: Verify Gemfile presence
         run: ls -la
+        working-directory: ./carsApp
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
+        working-directory: ./carsApp
 
       - name: Set up database schema
         run: bundle exec rails db:schema:load
+        working-directory: ./carsApp
 
       - name: Run tests
         run: bundle exec rails test
+        working-directory: ./carsApp
 
   lint:
     runs-on: ubuntu-latest
@@ -39,6 +43,8 @@ jobs:
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
+        working-directory: ./carsApp
 
       - name: Run RuboCop linter
         run: bundle exec rubocop
+        working-directory: ./carsApp
