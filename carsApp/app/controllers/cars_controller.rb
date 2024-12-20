@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This is the top level comment
 class CarsController < ApplicationController
   before_action :set_car, only: %i[show update destroy]
 
