@@ -11,7 +11,7 @@ Rails.application.configure do
   # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
   config.eager_load = true
 
-  config.hosts = ['ec2-3-80-117-14.compute-1.amazonaws.com']
+  config.hosts = ['ec2-100-27-188-22.compute-1.amazonaws.com']
 
   # Full error reports are disabled.
   config.consider_all_requests_local = false
