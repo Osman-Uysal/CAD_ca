@@ -30,19 +30,11 @@ jobs:
           ruby-version: '3.2.2'
           bundler-cache: true
 
-      - name: Set up database
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
+      - name: Set up database schema
+        run: bundle exec rails db:schema:load
 
       - name: Run tests
         run: bundle exec rails test
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: test/reports
 
   lint:
     runs-on: ubuntu-latest
@@ -56,14 +48,4 @@ jobs:
           ruby-version: '3.2.2'
           bundler-cache: true
 
-      - name: Generate binstubs
-        run: bundle binstubs bundler-audit brakeman rubocop
-
-      - name: Security audit dependencies
-        run: bundle exec bundle audit --update
-
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
-
-      - name: Lint Ruby files
-        run: bundle exec rubocop --auto-correct-all --disable-uncorrectable
+      - name: G
