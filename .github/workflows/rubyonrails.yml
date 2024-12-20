@@ -1,4 +1,5 @@
 name: "Ruby on Rails CI"
+
 on:
   push:
     branches: [ "main" ]
@@ -48,4 +49,5 @@ jobs:
           ruby-version: '3.2.2'
           bundler-cache: true
 
-      - name: G
+      - name: Run RuboCop linter
+        run: bundle exec rubocop
